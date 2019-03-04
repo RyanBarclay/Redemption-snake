@@ -1,26 +1,42 @@
-# starter-snake-python
 
-A simple [Battlesnake AI](http://battlesnake.io) written in Python. 
+# Striper-snake
 
-Visit [https://github.com/battlesnakeio/community/blob/master/starter-snakes.md](https://github.com/battlesnakeio/community/blob/master/starter-snakes.md) for API documentation and instructions for running your AI.
+This is a Snake entry for the [BattleSnake](http://battlesnake.io) programming competition in Victoria BC, written in Python.
 
-This AI client uses the [bottle web framework](http://bottlepy.org/docs/dev/index.html) to serve requests and the [gunicorn web server](http://gunicorn.org/) for running bottle on Heroku. Dependencies are listed in [requirements.txt](requirements.txt).
+Forked from the [Python starter snake](https://github.com/sendwithus/battlesnake-python) provided by [sendwithus](https://www.sendwithus.com).
 
-[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
+This AI client uses the [bottle web framework](http://bottlepy.org/docs/dev/index.html) to serve requests and the [gunicorn web server](http://gunicorn.org/) for running bottle on [Heroku](https://heroku.com). Dependencies are listed in [requirements.txt](requirements.txt).
 
-#### You will need...
+## Recap from 2019 BattleSnake:
 
-* a working Python 2.7 development environment ([getting started guide](http://hackercodex.com/guide/python-development-environment-on-mac-osx/))
-* experience [deploying Python apps to Heroku](https://devcenter.heroku.com/articles/getting-started-with-python#introduction)
-* [pip](https://pip.pypa.io/en/latest/installing.html) to install Python dependencies
+After the horrible performance of my last snake in 2019 I left embarrassed and let down. I learned that the majority of people used a BFS algorithm. This is far better at pathing than my model, but significantly slower. This year I want to either perfect my old strategy with the better pathing or develop an advanced deep neural net. This will entirely depend on if I can master google’s TensorFlow.
+
+###### This is a simple snake that might actualy stand a chance versus:
+
+1) Snakes coded by groups of people
+
+2) Snakes coded by people who copy and paste alpha go (advanced game neural network AI)  looking at you [CBinners](https://github.com/cbinners)
+
+3) Snakes coded by people that are way better at coding then me
+
+# Index
+* [State of AI](#state-of-ai)
+* [Running the Snake Locally](#running-the-snake-locally)
+* [Deploying to Heroku](#deploying-to-heroku)
+* [Questions?](#questions)
+* [License](#license)
+
+## State of AI
+
+  * TBA
 
 ## Running the Snake Locally
 
-1) [Fork this repo](https://github.com/battlesnakeio/starter-snake-python/fork).
+1) [Fork this repo](https://github.com/RyanBarclay/striper-snake/fork).
 
 2) Clone repo to your development environment:
 ```
-git clone git@github.com:<your github username>/starter-snake-python.git
+git clone git@github.com:username/battlesnake-python.git
 ```
 
 3) Install dependencies using [pip](https://pip.pypa.io/en/latest/installing.html):
@@ -33,10 +49,7 @@ pip install -r requirements.txt
 python app/main.py
 ```
 
-5) Test your snake by sending a curl to the running snake
-```
-curl -XPOST -H 'Content-Type: application/json' -d '{ "hello": "world"}' http://localhost:8080/start
-```
+5) Test client in your browser: [http://localhost:8080](http://localhost:8080).
 
 ## Deploying to Heroku
 
@@ -63,4 +76,7 @@ heroku logs --tail
 
 ## Questions?
 
-Email [battlesnake@sendwithus.com](mailto:battlesnake@sendwithus.com), or tweet [@send_with_us](http://twitter.com/send_with_us).
+Contact me [mrryanbarclay@gmail.com](mailto:mrryanbarclay@gmail.com) or contact [sendwithus](https://www.sendwithus.com) [battlesnake@sendwithus.com](mailto:battlesnake@sendwithus.com), [@send_with_us](http://twitter.com/send_with_us).
+
+## License
+[MIT](https://choosealicense.com/licenses/mit/)
