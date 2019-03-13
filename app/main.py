@@ -7,6 +7,9 @@ from api import ping_response, start_response, move_response, end_response
 
 @bottle.route('/')
 def index():
+    """
+    TODO: Write a better website than this
+    """
     return '''
     Battlesnake documentation can be found at
        <a href="https://docs.battlesnake.io">https://docs.battlesnake.io</a>.
@@ -35,9 +38,7 @@ def start():
     data = bottle.request.json
 
     """
-    TODO: If you intend to have a stateful snake AI,
-            initialize your snake state here using the
-            request's data if necessary.
+    TODO: Initalize snake as an object here
     """
     print(json.dumps(data))
 
@@ -51,8 +52,7 @@ def move():
     data = bottle.request.json
 
     """
-    TODO: Using the data from the endpoint request object, your
-            snake AI must choose a direction to move in.
+    TODO: Using the data from the endpoint request object, your snake AI must choose a direction to move in.
     """
     print(json.dumps(data))
 
@@ -67,8 +67,7 @@ def end():
     data = bottle.request.json
 
     """
-    TODO: If your snake AI was stateful,
-        clean up any stateful objects here.
+    TODO: Get rid of the snake object that is accociated to this game and snake id
     """
     print(json.dumps(data))
 

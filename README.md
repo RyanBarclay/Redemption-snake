@@ -9,7 +9,7 @@ This AI client uses the [bottle web framework](http://bottlepy.org/docs/dev/inde
 
 ## Recap from 2019 BattleSnake:
 
-After the horrible performance of my last snake in 2019 I left embarrassed and let down. I learned that the majority of people used a BFS algorithm. This is far better at pathing than my model, but significantly slower. This year I want to either perfect my old strategy with the better pathing or develop an advanced deep neural net. This will entirely depend on if I can master google’s TensorFlow.
+After the horrible performance of my last snake in 2019 I want to do much better next year. I learned that the majority of people used a BFS algorithm. This is far better at pathing than my model, but significantly slower. This year I want to either perfect my old strategy with the better pathing or develop an advanced deep neural net. This will entirely depend on if I can master google’s TensorFlow.
 
 ###### This is a simple snake that might actualy stand a chance versus:
 
@@ -20,15 +20,23 @@ After the horrible performance of my last snake in 2019 I left embarrassed and l
 3) Snakes coded by people that are way better at coding then me
 
 # Index
+* [Goals](#goals)
 * [State of AI](#state-of-ai)
 * [Running the Snake Locally](#running-the-snake-locally)
 * [Deploying to Heroku](#deploying-to-heroku)
 * [Questions?](#questions)
 * [License](#license)
 
+##  Goals
+* Have a BFS pathing snake
+* Have a snake that wins
+* No Machine Learning
+* Make each snake an object so new instances of game don't break snake backend
+
 ## State of AI
 
-  * TBA
+* 2019/03/08:
+    * Snake does nothing currently🙃
 
 ## Running the Snake Locally
 
