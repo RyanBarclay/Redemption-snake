@@ -6,7 +6,7 @@ import bottle
 from api import ping_response, start_response, move_response, end_response
 
 # Globals
-games   =   []
+GAMES = []
 
 @bottle.route('/')
 def index():
@@ -39,28 +39,25 @@ def start():
     data = bottle.request.json
 
     #This adds a new game as an object to the list of games.
-    games.append(newGame(data))
+    GAMES.append(new_game(data))
 
-    print(json.dumps(data))
+    # print(json.dumps(data))
 
-    color = "#00FF00"
+    color = "#E6009C"
+    print(len(GAMES))
 
     return start_response(color)
 
 @bottle.post('/move')
 def move():
+    """This is called every turn of the game by the engine server"""
     data = bottle.request.json
 
     #Update object data for specific game
-    curGame = game[findCurGameIndex(games, data)]
-    curGame.updateVals(data)
-
-    """
-    TODO: Do stuff with data
-    """
-
-    print(json.dumps(data))
-
+    cur_game = GAMES[findCurGameIndex(GAMES, data)]
+    cur_game.update_vals(data)
+    #todo: do stuff with data
+    # print(json.dumps(data))
     directions = ['up', 'down', 'left', 'right']
     direction = random.choice(directions)
 
@@ -68,81 +65,84 @@ def move():
 
 @bottle.post('/end')
 def end():
+    """This is called every time the game ends"""
     data = bottle.request.json
     #This gets rid of the object that is corisponding to this game
-    del games[findCurGameIndex(games, data)]
+    del GAMES[findCurGameIndex(GAMES, data)]
 
-    print(json.dumps(data))
+    # print(json.dumps(data))
 
     return end_response()
 
 # Expose WSGI app (so gunicorn can find it)
-application = bottle.default_app()
+APPLICATION = bottle.default_app()
 
 class game:
 
     def __init__(self, arg):
-        super(game, self).__init__()
+        # super(game, self).__init__()
 
-        self.gameId =   self.arg['game']
-        self.gameId =   self.gameId['id']
+        self.game_id = arg['game']
+        self.game_id = self.game_id['id']
 
-        self.turn   =   self.arg['turn']
+        self.turn = arg['turn']
 
-        game.boardTemp      =   self.arg['board']
-        self.boardHeight    =   game.boardTemp['height']
-        self.boardWidth     =   game.boardTemp['width']
-        self.boardFood      =   game.boardTemp['food']
-        self.boardSnakes    =   game.boardTemp['snakes']
+        game.board_temp = arg['board']
+        self.board_height = game.board_temp['height']
+        self.board_width = game.board_temp['width']
+        self.board_food = game.board_temp['food']
+        self.board_snakes = game.board_temp['snakes']
 
-        game.youTemp    =   self.arg['you']
-        self.youId      =   game.youTemp['id']
-        self.youName    =   game.youTemp['name']
-        self.youHealth  =   game.youTemp['health']
-        self.youBody    =   game.youTemp['body']
+        game.you_temp = arg['you']
+        self.you_id = game.you_temp['id']
+        self.you_name = game.you_temp['name']
+        self.you_health = game.you_temp['health']
+        self.you_body = game.you_temp['body']
 
-    def updateVals(jsonData):
-        self.gameId =   self.arg['game']
-        self.gameId =   self.gameId['id']
+    def update_vals(self, json_data):
 
-        self.turn   =   self.arg['turn']
+        self.game_id = json_data['game']
+        self.game_id = self.game_id['id']
 
-        game.boardTemp      =   self.arg['board']
-        self.boardHeight    =   game.boardTemp['height']
-        self.boardWidth     =   game.boardTemp['width']
-        self.boardFood      =   game.boardTemp['food']
-        self.boardSnakes    =   game.boardTemp['snakes']
+        self.turn = json_data['turn']
 
-        game.youTemp    =   self.arg['you']
-        self.youId      =   game.youTemp['id']
-        self.youName    =   game.youTemp['name']
-        self.youHealth  =   game.youTemp['health']
-        self.youBody    =   game.youTemp['body']
+        game.board_temp = json_data['board']
+        self.board_height = game.board_temp['height']
+        self.board_width = game.board_temp['width']
+        self.board_food = game.board_temp['food']
+        self.board_snakes = game.board_temp['snakes']
 
-def newGame(arg):
-    thisGame = game(arg)
-    return thisGame
+        game.you_temp = json_data['you']
+        self.you_id = game.you_temp['id']
+        self.you_name = game.you_temp['name']
+        self.you_health = game.you_temp['health']
+        self.you_body = game.you_temp['body']
 
-def findCurGameIndex(arrayOfGames[], jsonData):
-    numOfGames = len(games)
+def new_game(arg):
+    this_game = game(arg)
+    return this_game
 
-    while numOfGames > 0:
-        if (arrayOfGames[numOfGames-1].gameId == jsonData['id']):
+def findCurGameIndex(array, json_data):
+    num_of_games = len(GAMES)
+    cur_game_id = json_data['game']
+    cur_game_id = cur_game_id['id']
+
+    while num_of_games > 0:
+        if array[num_of_games-1].game_id == cur_game_id:
             #This is the one were wanting
-            return numOfGames-1
-            break
+            return num_of_games-1
         else:
             #This game isn't the objects you were looking for
-            numOfGames=-1
+            num_of_games=-1
 
-    if numOfGames >= 0:
-        raise Exeception('numOfGames should never be 0')
+    if num_of_games >= 0:
+        raise Exeception('num_of_games should never be 0')
     return -1
 
 
 if __name__ == '__main__':
     bottle.run(
-        application,
+        APPLICATION,
         host=os.getenv('IP', '0.0.0.0'),
         port=os.getenv('PORT', '8080'),
         debug=os.getenv('DEBUG', True)
