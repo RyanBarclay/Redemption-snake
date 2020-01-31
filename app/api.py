@@ -1,9 +1,11 @@
 import json
 from bottle import HTTPResponse
 
+RESPONSE_TIME = 200
+
 def ping_response():
     return HTTPResponse(
-        status=200
+        status=RESPONSE_TIME
     )
 
 def start_response(color):
@@ -11,7 +13,7 @@ def start_response(color):
         "Color value must be string"
 
     return HTTPResponse(
-        status=200,
+        status=RESPONSE_TIME,
         headers={
             "Content-Type": "application/json"
         },
@@ -25,7 +27,7 @@ def move_response(move):
         "Move must be one of [up, down, left, right]"
 
     return HTTPResponse(
-        status=200,
+        status=RESPONSE_TIME,
         headers={
             "Content-Type": "application/json"
         },
@@ -36,5 +38,5 @@ def move_response(move):
 
 def end_response():
     return HTTPResponse(
-        status=200
+        status=RESPONSE_TIME
     )
