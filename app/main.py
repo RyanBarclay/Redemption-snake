@@ -11,11 +11,14 @@ GAMES = []
 @bottle.route('/')
 def index():
     """
-    TODO: Write a better website than this
+    TODO: Write a website that points to my portfolio.. can be super basic
     """
     return '''
     Battlesnake documentation can be found at
        <a href="https://docs.battlesnake.io">https://docs.battlesnake.io</a>.
+    <br />
+    My Explanation of the snake can be found at
+       <a href="https://ryanbarclay.ca/Pages/Projects/battlesnake2020.html</a>.
     '''
 
 @bottle.route('/static/<path:path>')
@@ -43,8 +46,8 @@ def start():
 
     # print(json.dumps(data))
 
-    color = "#E6009C"
-    print(len(GAMES))
+    color = "#1990A9"
+    # print(len(GAMES))
 
     return start_response(color)
 
@@ -57,6 +60,8 @@ def move():
     cur_game = GAMES[findCurGameIndex(GAMES, data)]
     cur_game.update_vals(data)
     #todo: do stuff with data
+
+
     # print(json.dumps(data))
     directions = ['up', 'down', 'left', 'right']
     direction = random.choice(directions)
@@ -71,6 +76,7 @@ def end():
     del GAMES[findCurGameIndex(GAMES, data)]
 
     # print(json.dumps(data))
+    # print(len(GAMES))
 
     return end_response()
 
@@ -133,10 +139,10 @@ def findCurGameIndex(array, json_data):
             return num_of_games-1
         else:
             #This game isn't the objects you were looking for
-            num_of_games=-1
+            num_of_games -= 1
 
     if num_of_games >= 0:
-        raise Exeception('num_of_games should never be 0')
+        # print("This shouldn't happen")
     return -1
 
 
